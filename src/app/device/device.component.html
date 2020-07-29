@@ -11,10 +11,28 @@
         </div>
       </div>
     </div>
-    <div class="card-footer text-right">
-      <span>
-        <dm-icon-info color="black"></dm-icon-info>
+    <div class="card-footer text-left">
+      <span (click)="showPopover()" class="clickable" #popoverTrigger>
+        <dm-icon-info [color]="iconColor"></dm-icon-info>
       </span>
+      <dm-popover [popoverTrigger]="popoverTrigger">
+        <div class="mb-2 pb-2 border-bottom">
+          <h5>
+            Battery level:
+            <span [style.color]="deviceBatteryLevelTextColor"
+              >{{ device.batteryLevel }}%</span
+            >
+          </h5>
+        </div>
+        <div>
+          <h5>
+            Signal strength:
+            <span [style.color]="signalStrengthTextColor">{{
+              device.signalStrength
+            }}</span>
+          </h5>
+        </div>
+      </dm-popover>
     </div>
   </div>
 </div>
