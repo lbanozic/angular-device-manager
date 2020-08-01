@@ -2,3 +2,26 @@
   min-width: 24rem;
   margin-bottom: 2rem;
 }
+
+.min-max-container {
+  min-height: 1.5rem;
+}
+
+.device-background-indicator {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  color: #fff;
+}
+
+.device-background-indicator--alarm {
+  background-color: #dc3545;
+}
+
+.device-background-indicator--no_data {
+  background-color: #6c757d;
+}
+
+.device-background-indicator--ok {
+  background-color: #007bff;
+}
