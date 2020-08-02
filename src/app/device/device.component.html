@@ -16,7 +16,11 @@
       </div>
     </div>
     <div class="card-footer text-left">
-      <span (click)="showPopover()" class="clickable" #popoverTrigger>
+      <span
+        (click)="showBatteryAndSignalIndicatorPopover()"
+        class="clickable"
+        #popoverTrigger
+      >
         <dm-icon-info [color]="iconColor"></dm-icon-info>
       </span>
       <dm-popover [popoverTrigger]="popoverTrigger">

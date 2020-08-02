@@ -11,7 +11,7 @@ export class DeviceComponent implements OnInit {
   @Input() device: Device;
 
   @ViewChild(PopoverComponent)
-  public popover: PopoverComponent;
+  public batteryAndSignalIndicatorPopover: PopoverComponent;
 
   readonly colorRed: string = '#dc3545';
   readonly colorBlack: string = '#000';
@@ -63,7 +63,7 @@ export class DeviceComponent implements OnInit {
     return DeviceStatus.Ok;
   }
 
-  showPopover() {
-    this.popover.show();
+  showBatteryAndSignalIndicatorPopover() {
+    this.batteryAndSignalIndicatorPopover.show();
   }
 }
