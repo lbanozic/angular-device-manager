@@ -8,6 +8,8 @@ import { DeviceListComponent } from './device-list/device-list.component';
 import { DeviceComponent } from './device/device.component';
 import { IconInfoComponent } from './icons/icon-info/icon-info.component';
 import { IconPlusComponent } from './icons/icon-plus/icon-plus.component';
+import { IconXComponent } from './icons/icon-x/icon-x.component';
+import { ModalComponent } from './modal/modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PopoverComponent } from './popover/popover.component';
 
@@ -20,6 +22,8 @@ import { PopoverComponent } from './popover/popover.component';
     IconInfoComponent,
     PopoverComponent,
     IconPlusComponent,
+    ModalComponent,
+    IconXComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, PortalModule, OverlayModule],
   providers: [],
