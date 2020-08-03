@@ -1,8 +1,15 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <h1 class="navbar-brand">{{ pageTitle }}</h1>
   <div class="ml-auto">
-    <button type="button" class="btn btn-success">
+    <button
+      (click)="showNewDeviceModal()"
+      type="button"
+      class="btn btn-success"
+    >
       <dm-icon-plus></dm-icon-plus>
     </button>
   </div>
 </nav>
+<dm-modal title="Add new device">
+  <dm-device-form></dm-device-form>
+</dm-modal>

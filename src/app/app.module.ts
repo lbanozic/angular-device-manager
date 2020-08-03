@@ -1,9 +1,11 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DeviceFormComponent } from './device-form/device-form.component';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { DeviceComponent } from './device/device.component';
 import { IconInfoComponent } from './icons/icon-info/icon-info.component';
@@ -24,8 +26,15 @@ import { PopoverComponent } from './popover/popover.component';
     IconPlusComponent,
     ModalComponent,
     IconXComponent,
+    DeviceFormComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, PortalModule, OverlayModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    PortalModule,
+    OverlayModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
