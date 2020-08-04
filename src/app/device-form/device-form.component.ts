@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AsyncValidatorFn,
   FormControl,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  first,
+  map,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'dm-device-form',
@@ -20,10 +29,11 @@ export class DeviceFormComponent implements OnInit {
   ngOnInit(): void {
     this.deviceForm = new FormGroup(
       {
-        devui: new FormControl('', [
+        devui: new FormControl(
+          '',
           Validators.required,
-          Validators.pattern('#+([a-fA-F0-9]{6})$'),
-        ]),
+          this.hexPatternValidator
+        ),
         min: new FormControl(''),
         max: new FormControl(''),
         name: new FormControl('', Validators.required),
@@ -46,6 +56,26 @@ export class DeviceFormComponent implements OnInit {
 
   get name() {
     return this.deviceForm.get('name');
+  }
+
+  get hexPatternValidator(): AsyncValidatorFn {
+    return (
+      control: FormControl
+    ):
+      | Promise<ValidationErrors | null>
+      | Observable<ValidationErrors | null> => {
+      return control.valueChanges.pipe(
+        debounceTime(1000),
+        distinctUntilChanged(),
+        map((value) =>
+          new RegExp('#+([a-fA-F0-9]{6})$').test(value)
+            ? null
+            : { isHexPatternInvalid: true }
+        ),
+        first(),
+        catchError(() => of(null))
+      );
+    };
   }
 
   get minMaxValidator(): ValidatorFn {

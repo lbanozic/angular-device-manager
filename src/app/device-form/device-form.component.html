@@ -5,21 +5,15 @@
     <input
       type="text"
       class="form-control"
-      [class.is-invalid]="
-        (deviceForm.touched || deviceForm.dirty) && devui.invalid
-      "
-      pattern="#+([a-fA-F0-9]{6})$"
+      [class.is-invalid]="(devui.touched || devui.dirty) && devui.invalid"
       placeholder="Hex pattern, e.g. #44dd11 or #cb74ae"
       id="devui"
       formControlName="devui"
       required
     />
-    <div
-      class="invalid-feedback-message"
-      *ngIf="deviceForm.touched || deviceForm.dirty"
-    >
+    <div class="invalid-feedback-message" *ngIf="devui.touched || devui.dirty">
       <div *ngIf="devui.errors?.required">Devui is required.</div>
-      <div *ngIf="devui.errors?.pattern">
+      <div *ngIf="devui.errors?.isHexPatternInvalid">
         Devui must be in hex pattern, e.g. #44dd11 or #cb74ae.
       </div>
     </div>
@@ -71,16 +65,14 @@
     <input
       type="text"
       class="form-control"
-      [class.is-invalid]="
-        (deviceForm.touched || deviceForm.dirty) && name.invalid
-      "
+      [class.is-invalid]="(name.touched || name.dirty) && name.invalid"
       id="name"
       formControlName="name"
       required
     />
     <div
       class="invalid-feedback-message"
-      *ngIf="(deviceForm.touched || deviceForm.dirty) && name.invalid"
+      *ngIf="(name.touched || name.dirty) && name.invalid"
     >
       Name is required.
     </div>
