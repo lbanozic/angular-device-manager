@@ -11,5 +11,5 @@
   </div>
 </nav>
 <dm-modal title="Add new device" (modalClosed)="onDeviceModalClosed()">
-  <dm-device-form></dm-device-form>
+  <dm-device-form (formSubmitted)="onDeviceFormSubmitted()"></dm-device-form>
 </dm-modal>

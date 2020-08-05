@@ -19,19 +19,19 @@ export class ModalComponent {
   @Output() modalClosed = new EventEmitter();
 
   @ViewChild(CdkPortal)
-  public modalTemplate: CdkPortal;
+  modalTemplate: CdkPortal;
 
   private overlayRef: OverlayRef;
 
   constructor(private overlay: Overlay) {}
 
-  public show() {
+  show() {
     this.overlayRef = this.overlay.create(this.getOverlayConfig());
     this.overlayRef.attach(this.modalTemplate);
     this.overlayRef.backdropClick().subscribe(() => this.hide());
   }
 
-  public hide() {
+  hide() {
     this.overlayRef.detach();
     this.modalClosed.emit();
   }

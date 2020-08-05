@@ -11,10 +11,10 @@ export class NavbarComponent implements OnInit {
   pageTitle = 'Angular Device Manager';
 
   @ViewChild(ModalComponent)
-  public deviceFormModalComponent: ModalComponent;
+  deviceFormModalComponent: ModalComponent;
 
   @ViewChild(DeviceFormComponent)
-  public deviceFormComponent: DeviceFormComponent;
+  deviceFormComponent: DeviceFormComponent;
 
   constructor() {}
 
@@ -26,5 +26,9 @@ export class NavbarComponent implements OnInit {
 
   onDeviceModalClosed() {
     this.deviceFormComponent.resetDeviceForm();
+  }
+
+  onDeviceFormSubmitted() {
+    this.deviceFormModalComponent.hide();
   }
 }

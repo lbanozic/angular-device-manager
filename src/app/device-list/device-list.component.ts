@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
 
@@ -9,15 +8,14 @@ import { DeviceService } from '../device.service';
   styleUrls: ['./device-list.component.css'],
 })
 export class DeviceListComponent implements OnInit {
-  devices$: Observable<Device[]>;
+  devices: Device[];
 
   constructor(private deviceService: DeviceService) {}
 
   ngOnInit(): void {
-    this.devices$ = this.deviceService.getDevices();
-  }
-
-  getDevices(): Observable<Device[]> {
-    return this.deviceService.getDevices();
+    this.deviceService.devices$.subscribe(
+      (deviceList) => (this.devices = deviceList)
+    );
+    this.deviceService.getDevices();
   }
 }

@@ -5,6 +5,8 @@ export enum DeviceStatus {
 }
 
 export interface Device {
+  devui: string;
+  name: string;
   reading?: number;
   incomingDate?: Date;
   min?: number;

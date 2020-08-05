@@ -11,7 +11,7 @@ export class DeviceComponent implements OnInit {
   @Input() device: Device;
 
   @ViewChild(PopoverComponent)
-  public batteryAndSignalIndicatorPopover: PopoverComponent;
+  batteryAndSignalIndicatorPopover: PopoverComponent;
 
   readonly colorRed: string = '#dc3545';
   readonly colorBlack: string = '#000';

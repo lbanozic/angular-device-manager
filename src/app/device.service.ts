@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Device } from './device';
 import { DEVICES } from './device-mock';
 
@@ -7,9 +7,17 @@ import { DEVICES } from './device-mock';
   providedIn: 'root',
 })
 export class DeviceService {
+  devices$ = new Subject<Device[]>();
+  private deviceList: Device[] = DEVICES;
+
   constructor() {}
 
-  getDevices(): Observable<Device[]> {
-    return of(DEVICES);
+  getDevices() {
+    this.devices$.next(this.deviceList);
+  }
+
+  addDevice(device: Device) {
+    this.deviceList.push(device);
+    this.devices$.next(this.deviceList);
   }
 }

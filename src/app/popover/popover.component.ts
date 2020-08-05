@@ -15,10 +15,10 @@ import { Component, HostListener, Input, ViewChild } from '@angular/core';
 })
 export class PopoverComponent {
   @Input()
-  public popoverTrigger: HTMLElement;
+  popoverTrigger: HTMLElement;
 
   @ViewChild(CdkPortal)
-  public popoverTemplate: CdkPortal;
+  popoverTemplate: CdkPortal;
 
   private overlayRef: OverlayRef;
 
@@ -41,19 +41,19 @@ export class PopoverComponent {
 
   constructor(private overlay: Overlay) {}
 
-  public show() {
+  show() {
     this.overlayRef = this.overlay.create(this.getOverlayConfig());
     this.overlayRef.attach(this.popoverTemplate);
     this.updateOverlayWidth();
     this.overlayRef.backdropClick().subscribe(() => this.hide());
   }
 
-  public hide() {
+  hide() {
     this.overlayRef.detach();
   }
 
   @HostListener('window:resize')
-  public onWindowResize() {
+  onWindowResize() {
     this.updateOverlayWidth();
   }
 

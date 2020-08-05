@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AsyncValidatorFn,
   FormControl,
@@ -14,6 +14,8 @@ import {
   first,
   map,
 } from 'rxjs/operators';
+import { Device } from '../device';
+import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'dm-device-form',
@@ -21,9 +23,11 @@ import {
   styleUrls: ['./device-form.component.css'],
 })
 export class DeviceFormComponent implements OnInit {
+  @Output() formSubmitted = new EventEmitter();
+
   deviceForm: FormGroup;
 
-  constructor() {}
+  constructor(private deviceService: DeviceService) {}
 
   ngOnInit(): void {
     this.deviceForm = new FormGroup(
@@ -104,11 +108,20 @@ export class DeviceFormComponent implements OnInit {
     };
   }
 
-  public resetDeviceForm() {
+  resetDeviceForm() {
     this.deviceForm.reset();
   }
 
   onSubmit() {
-    this.deviceForm.reset();
+    const device: Device = {
+      name: this.name.value,
+      devui: this.devui.value,
+      min: this.min.value,
+      max: this.max.value,
+      batteryLevel: 100,
+      signalStrength: 10,
+    };
+    this.deviceService.addDevice(device);
+    this.formSubmitted.emit();
   }
 }
