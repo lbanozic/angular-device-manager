@@ -4,7 +4,6 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -38,6 +37,7 @@ export class DeviceFormComponent implements OnInit {
         max: new FormControl(''),
         name: new FormControl('', Validators.required),
       },
+      [],
       this.minMaxValidator
     );
   }
@@ -64,28 +64,43 @@ export class DeviceFormComponent implements OnInit {
     ):
       | Promise<ValidationErrors | null>
       | Observable<ValidationErrors | null> => {
-      return control.valueChanges.pipe(
-        debounceTime(1000),
-        distinctUntilChanged(),
-        map((value) =>
-          new RegExp('#+([a-fA-F0-9]{6})$').test(value)
-            ? null
-            : { isHexPatternInvalid: true }
-        ),
-        first(),
-        catchError(() => of(null))
-      );
+      if (control.value) {
+        return control.valueChanges.pipe(
+          debounceTime(1000),
+          distinctUntilChanged(),
+          map((value) =>
+            new RegExp('#+([a-fA-F0-9]{6})$').test(value)
+              ? null
+              : { isHexPatternInvalid: true }
+          ),
+          first(),
+          catchError(() => of(null))
+        );
+      }
+      return of(null);
     };
   }
 
-  get minMaxValidator(): ValidatorFn {
-    return (control: FormGroup): ValidationErrors | null => {
-      const minValue = control.get('min').value;
-      const maxValue = control.get('max').value;
-
-      return minValue && maxValue && minValue > maxValue
-        ? { minMaxInvalid: true }
-        : null;
+  get minMaxValidator(): AsyncValidatorFn {
+    return (
+      control: FormGroup
+    ):
+      | Promise<ValidationErrors | null>
+      | Observable<ValidationErrors | null> => {
+      if (control.value) {
+        return control.valueChanges.pipe(
+          debounceTime(1000),
+          distinctUntilChanged(),
+          map((formValues) =>
+            formValues.min && formValues.max && formValues.min > formValues.max
+              ? { minMaxInvalid: true }
+              : null
+          ),
+          first(),
+          catchError(() => of(null))
+        );
+      }
+      return of(null);
     };
   }
 
