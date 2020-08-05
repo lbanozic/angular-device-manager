@@ -25,3 +25,7 @@
 .device-background-indicator--Ok {
   background-color: #007bff;
 }
+
+.text-small {
+  font-size: 80%;
+}

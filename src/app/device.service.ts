@@ -8,8 +8,10 @@ import { DEVICES } from './device-mock';
 })
 export class DeviceService {
   devices$ = new Subject<Device[]>();
+
   private deviceList: Device[] = DEVICES;
   private deviceListFiltered: Device[] = DEVICES;
+
   private deviceStatusFilters: string[] = [
     DeviceStatus.Alarm,
     DeviceStatus.NoData,
