@@ -2,12 +2,31 @@ import { Device } from './device';
 
 export const DEVICES: Device[] = [
   {
+    name: 'Device 0004',
+    devui: '#000004',
+    reading: 19,
+    incomingDate: getDateWithMinutesOffset(-3),
+    max: 20,
+    batteryLevel: 47,
+    signalStrength: 8,
+  },
+  {
     name: 'Device 0001',
     devui: '#000001',
     min: -100,
     max: 100,
     batteryLevel: 92,
     signalStrength: 8,
+  },
+  {
+    name: 'Device 0010',
+    devui: '#000010',
+    reading: 1,
+    incomingDate: new Date(),
+    min: 0,
+    max: 200,
+    batteryLevel: 98,
+    signalStrength: 1,
   },
   {
     name: 'Device 0002',
@@ -20,21 +39,6 @@ export const DEVICES: Device[] = [
     signalStrength: 10,
   },
   {
-    name: 'Device 0003',
-    devui: '#000003',
-    batteryLevel: 30,
-    signalStrength: 9,
-  },
-  {
-    name: 'Device 0004',
-    devui: '#000004',
-    reading: 19,
-    incomingDate: getDateWithMinutesOffset(-3),
-    max: 20,
-    batteryLevel: 47,
-    signalStrength: 8,
-  },
-  {
     name: 'Device 0005',
     devui: '#000005',
     reading: 16,
@@ -43,6 +47,12 @@ export const DEVICES: Device[] = [
     max: 10,
     batteryLevel: 26,
     signalStrength: 3,
+  },
+  {
+    name: 'Device 0003',
+    devui: '#000003',
+    batteryLevel: 30,
+    signalStrength: 9,
   },
   {
     name: 'Device 0006',
@@ -78,16 +88,6 @@ export const DEVICES: Device[] = [
     incomingDate: new Date(),
     batteryLevel: 72,
     signalStrength: 9,
-  },
-  {
-    name: 'Device 0010',
-    devui: '#000010',
-    reading: 1,
-    incomingDate: new Date(),
-    min: 0,
-    max: 200,
-    batteryLevel: 98,
-    signalStrength: 1,
   },
   {
     name: 'Device 0011',
