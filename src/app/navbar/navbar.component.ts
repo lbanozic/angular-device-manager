@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalComponent } from '../modal/modal.component';
 import { DeviceFormComponent } from '../device-form/device-form.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'dm-navbar',

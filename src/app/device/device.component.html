@@ -2,11 +2,11 @@
   <div class="card">
     <div
       class="card-body device-background-indicator device-background-indicator--{{
-        deviceStatus
+        device.status
       }}"
     >
       <h6>{{ device.name }}</h6>
-      <h6>{{ device.devui }}</h6>
+      <h6 class="font-weight-lighter">{{ device.devui }}</h6>
       <h2 class="text-center">{{ deviceReading }}</h2>
       <div class="row min-max-container">
         <div class="col text-left">

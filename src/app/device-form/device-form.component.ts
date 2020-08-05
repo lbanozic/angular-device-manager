@@ -14,7 +14,7 @@ import {
   first,
   map,
 } from 'rxjs/operators';
-import { Device } from '../device';
+import { Device, DeviceStatus } from '../device';
 import { DeviceService } from '../device.service';
 
 @Component({
@@ -120,6 +120,7 @@ export class DeviceFormComponent implements OnInit {
       max: this.max.value,
       batteryLevel: 100,
       signalStrength: 10,
+      status: DeviceStatus.Ok,
     };
     this.deviceService.addDevice(device);
     this.formSubmitted.emit();

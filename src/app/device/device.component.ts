@@ -45,24 +45,6 @@ export class DeviceComponent implements OnInit {
     return this.device.reading?.toString() ?? '-';
   }
 
-  get deviceStatus(): DeviceStatus {
-    if (
-      this.device.reading < this.device.min ||
-      this.device.reading > this.device.max
-    ) {
-      return DeviceStatus.Alarm;
-    }
-
-    if (
-      !this.device.reading ||
-      new Date().getTime() - this.device.incomingDate?.getTime() > 1000 * 60 * 2
-    ) {
-      return DeviceStatus.NoData;
-    }
-
-    return DeviceStatus.Ok;
-  }
-
   showBatteryAndSignalIndicatorPopover() {
     this.batteryAndSignalIndicatorPopover.show();
   }

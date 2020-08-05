@@ -1,4 +1,4 @@
-import { Device } from './device';
+import { Device, DeviceStatus } from './device';
 
 export const DEVICES: Device[] = [
   {
@@ -9,6 +9,7 @@ export const DEVICES: Device[] = [
     max: 20,
     batteryLevel: 47,
     signalStrength: 8,
+    status: DeviceStatus.NoData,
   },
   {
     name: 'Device 0001',
@@ -17,6 +18,7 @@ export const DEVICES: Device[] = [
     max: 100,
     batteryLevel: 92,
     signalStrength: 8,
+    status: DeviceStatus.NoData,
   },
   {
     name: 'Device 0010',
@@ -27,6 +29,7 @@ export const DEVICES: Device[] = [
     max: 200,
     batteryLevel: 98,
     signalStrength: 1,
+    status: DeviceStatus.Ok,
   },
   {
     name: 'Device 0002',
@@ -37,6 +40,7 @@ export const DEVICES: Device[] = [
     max: 100,
     batteryLevel: 67,
     signalStrength: 10,
+    status: DeviceStatus.Alarm,
   },
   {
     name: 'Device 0005',
@@ -47,12 +51,14 @@ export const DEVICES: Device[] = [
     max: 10,
     batteryLevel: 26,
     signalStrength: 3,
+    status: DeviceStatus.Alarm,
   },
   {
     name: 'Device 0003',
     devui: '#000003',
     batteryLevel: 30,
     signalStrength: 9,
+    status: DeviceStatus.NoData,
   },
   {
     name: 'Device 0006',
@@ -62,6 +68,7 @@ export const DEVICES: Device[] = [
     min: -50,
     batteryLevel: 81,
     signalStrength: 5,
+    status: DeviceStatus.Ok,
   },
   {
     name: 'Device 0007',
@@ -70,6 +77,7 @@ export const DEVICES: Device[] = [
     max: 100,
     batteryLevel: 16,
     signalStrength: 7,
+    status: DeviceStatus.NoData,
   },
   {
     name: 'Device 0008',
@@ -80,6 +88,7 @@ export const DEVICES: Device[] = [
     max: 50,
     batteryLevel: 65,
     signalStrength: 2,
+    status: DeviceStatus.NoData,
   },
   {
     name: 'Device 0009',
@@ -88,6 +97,7 @@ export const DEVICES: Device[] = [
     incomingDate: new Date(),
     batteryLevel: 72,
     signalStrength: 9,
+    status: DeviceStatus.Ok,
   },
   {
     name: 'Device 0011',
@@ -95,6 +105,7 @@ export const DEVICES: Device[] = [
     max: 150,
     batteryLevel: 25,
     signalStrength: 4,
+    status: DeviceStatus.NoData,
   },
   {
     name: 'Device 0012',
@@ -105,6 +116,7 @@ export const DEVICES: Device[] = [
     max: 150,
     batteryLevel: 57,
     signalStrength: 6,
+    status: DeviceStatus.Alarm,
   },
   {
     name: 'Device 0013',
@@ -115,6 +127,7 @@ export const DEVICES: Device[] = [
     max: 500,
     batteryLevel: 100,
     signalStrength: 5,
+    status: DeviceStatus.Alarm,
   },
   {
     name: 'Device 0014',
@@ -125,6 +138,7 @@ export const DEVICES: Device[] = [
     max: 1000,
     batteryLevel: 6,
     signalStrength: 8,
+    status: DeviceStatus.NoData,
   },
   {
     name: 'Device 0015',
@@ -135,6 +149,7 @@ export const DEVICES: Device[] = [
     max: 100,
     batteryLevel: 52,
     signalStrength: 10,
+    status: DeviceStatus.Ok,
   },
 ];
 

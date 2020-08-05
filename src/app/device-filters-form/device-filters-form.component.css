@@ -1,0 +1,12 @@
+.checkbox-large {
+  width: 1rem;
+  height: 1rem;
+}
+
+.form-check-label {
+  cursor: pointer;
+}
+
+.form-check-input {
+  cursor: pointer;
+}

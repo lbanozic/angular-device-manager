@@ -1,0 +1,38 @@
+<form [formGroup]="deviceFiltersForm">
+  <div class="form-check-inline mr-4">
+    <label class="form-check-label d-flex flex-column align-items-center">
+      <h5 class="mb-1">
+        <span class="badge badge-danger">Alarm</span>
+      </h5>
+      <input
+        type="checkbox"
+        class="form-check-input checkbox-large"
+        formControlName="Alarm"
+      />
+    </label>
+  </div>
+  <div class="form-check-inline mr-4">
+    <label class="form-check-label d-flex flex-column align-items-center">
+      <h5 class="mb-1">
+        <span class="badge badge-secondary">No data</span>
+      </h5>
+      <input
+        type="checkbox"
+        class="form-check-input checkbox-large"
+        formControlName="NoData"
+      />
+    </label>
+  </div>
+  <div class="form-check-inline mr-4">
+    <label class="form-check-label d-flex flex-column align-items-center">
+      <h5 class="mb-1">
+        <span class="badge badge-primary">Ok</span>
+      </h5>
+      <input
+        type="checkbox"
+        class="form-check-input checkbox-large"
+        formControlName="Ok"
+      />
+    </label>
+  </div>
+</form>

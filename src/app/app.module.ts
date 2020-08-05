@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DeviceFiltersFormComponent } from './device-filters-form/device-filters-form.component';
 import { DeviceFormComponent } from './device-form/device-form.component';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { DeviceComponent } from './device/device.component';
@@ -27,6 +28,7 @@ import { PopoverComponent } from './popover/popover.component';
     ModalComponent,
     IconXComponent,
     DeviceFormComponent,
+    DeviceFiltersFormComponent,
   ],
   imports: [
     BrowserModule,

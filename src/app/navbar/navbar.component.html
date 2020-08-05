@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <h1 class="navbar-brand">{{ pageTitle }}</h1>
+
+  <dm-device-filters-form class="ml-auto"></dm-device-filters-form>
+
   <div class="ml-auto">
     <button
       (click)="showDeviceFormModal()"
@@ -10,6 +13,7 @@
     </button>
   </div>
 </nav>
+
 <dm-modal title="Add new device" (modalClosed)="onDeviceModalClosed()">
   <dm-device-form (formSubmitted)="onDeviceFormSubmitted()"></dm-device-form>
 </dm-modal>

@@ -14,14 +14,14 @@
   color: #fff;
 }
 
-.device-background-indicator--alarm {
+.device-background-indicator--Alarm {
   background-color: #dc3545;
 }
 
-.device-background-indicator--no_data {
+.device-background-indicator--NoData {
   background-color: #6c757d;
 }
 
-.device-background-indicator--ok {
+.device-background-indicator--Ok {
   background-color: #007bff;
 }

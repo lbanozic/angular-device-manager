@@ -1,7 +1,7 @@
 export enum DeviceStatus {
-  Alarm = 'alarm',
-  NoData = 'no_data',
-  Ok = 'ok',
+  Alarm = 'Alarm',
+  NoData = 'NoData',
+  Ok = 'Ok',
 }
 
 export interface Device {
@@ -13,4 +13,5 @@ export interface Device {
   max?: number;
   batteryLevel: number;
   signalStrength: number;
+  status: DeviceStatus;
 }

@@ -16,10 +16,10 @@ export class DeviceListComponent implements OnInit {
     this.deviceService.devices$.subscribe((deviceList) => {
       this.devices = deviceList;
       this.devices.sort((device1, device2) => {
-        if (device1.name > device2.name) {
+        if (device1.name.toLowerCase() > device2.name.toLowerCase()) {
           return 1;
         }
-        if (device1.name < device2.name) {
+        if (device1.name.toLowerCase() < device2.name.toLowerCase()) {
           return -1;
         }
         return 0;
