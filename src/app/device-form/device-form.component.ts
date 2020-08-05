@@ -104,7 +104,11 @@ export class DeviceFormComponent implements OnInit {
     };
   }
 
+  public resetDeviceForm() {
+    this.deviceForm.reset();
+  }
+
   onSubmit() {
-    console.info(this.deviceForm.value);
+    this.deviceForm.reset();
   }
 }

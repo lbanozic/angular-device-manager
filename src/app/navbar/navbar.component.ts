@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
+import { DeviceFormComponent } from '../device-form/device-form.component';
 
 @Component({
   selector: 'dm-navbar',
@@ -10,13 +11,20 @@ export class NavbarComponent implements OnInit {
   pageTitle = 'Angular Device Manager';
 
   @ViewChild(ModalComponent)
-  public newDeviceModal: ModalComponent;
+  public deviceFormModalComponent: ModalComponent;
+
+  @ViewChild(DeviceFormComponent)
+  public deviceFormComponent: DeviceFormComponent;
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  showNewDeviceModal() {
-    this.newDeviceModal.show();
+  showDeviceFormModal() {
+    this.deviceFormModalComponent.show();
+  }
+
+  onDeviceModalClosed() {
+    this.deviceFormComponent.resetDeviceForm();
   }
 }

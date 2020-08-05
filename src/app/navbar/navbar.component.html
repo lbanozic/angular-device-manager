@@ -2,7 +2,7 @@
   <h1 class="navbar-brand">{{ pageTitle }}</h1>
   <div class="ml-auto">
     <button
-      (click)="showNewDeviceModal()"
+      (click)="showDeviceFormModal()"
       type="button"
       class="btn btn-success"
     >
@@ -10,6 +10,6 @@
     </button>
   </div>
 </nav>
-<dm-modal title="Add new device">
+<dm-modal title="Add new device" (modalClosed)="onDeviceModalClosed()">
   <dm-device-form></dm-device-form>
 </dm-modal>

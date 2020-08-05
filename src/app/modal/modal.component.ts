@@ -1,6 +1,12 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortal } from '@angular/cdk/portal';
-import { Component, ViewChild, Input } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'dm-modal',
@@ -9,6 +15,8 @@ import { Component, ViewChild, Input } from '@angular/core';
 })
 export class ModalComponent {
   @Input() title: string;
+
+  @Output() modalClosed = new EventEmitter();
 
   @ViewChild(CdkPortal)
   public modalTemplate: CdkPortal;
@@ -25,6 +33,7 @@ export class ModalComponent {
 
   public hide() {
     this.overlayRef.detach();
+    this.modalClosed.emit();
   }
 
   private getOverlayConfig(): OverlayConfig {
