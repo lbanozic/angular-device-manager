@@ -2,7 +2,7 @@ import { Device, DeviceStatus } from './device';
 
 export const DEVICES: Device[] = [
   {
-    name: 'Device 0004',
+    name: 'Device 4',
     devui: '#000004',
     reading: 19,
     incomingDate: getDateWithMinutesOffset(-3),
@@ -12,7 +12,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.NoData,
   },
   {
-    name: 'Device 0001',
+    name: 'Device 1',
     devui: '#000001',
     min: -100,
     max: 100,
@@ -21,7 +21,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.NoData,
   },
   {
-    name: 'Device 0010',
+    name: 'Device 10',
     devui: '#000010',
     reading: 1,
     incomingDate: new Date(),
@@ -32,7 +32,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.Ok,
   },
   {
-    name: 'Device 0002',
+    name: 'Device 2',
     devui: '#000002',
     reading: -5,
     incomingDate: new Date(),
@@ -43,7 +43,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.Alarm,
   },
   {
-    name: 'Device 0005',
+    name: 'Device 5',
     devui: '#000005',
     reading: 16,
     incomingDate: getDateWithMinutesOffset(-1),
@@ -54,14 +54,14 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.Alarm,
   },
   {
-    name: 'Device 0003',
+    name: 'Device 3',
     devui: '#000003',
     batteryLevel: 30,
     signalStrength: 9,
     status: DeviceStatus.NoData,
   },
   {
-    name: 'Device 0006',
+    name: 'Device 6',
     devui: '#000006',
     reading: -4,
     incomingDate: new Date(),
@@ -71,7 +71,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.Ok,
   },
   {
-    name: 'Device 0007',
+    name: 'Device 7',
     devui: '#000007',
     min: 0,
     max: 100,
@@ -80,7 +80,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.NoData,
   },
   {
-    name: 'Device 0008',
+    name: 'Device 8',
     devui: '#000008',
     reading: 2,
     incomingDate: getDateWithMinutesOffset(-4),
@@ -91,7 +91,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.NoData,
   },
   {
-    name: 'Device 0009',
+    name: 'Device 9',
     devui: '#000009',
     reading: 11,
     incomingDate: new Date(),
@@ -100,7 +100,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.Ok,
   },
   {
-    name: 'Device 0011',
+    name: 'Device 11',
     devui: '#000011',
     max: 150,
     batteryLevel: 25,
@@ -108,7 +108,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.NoData,
   },
   {
-    name: 'Device 0012',
+    name: 'Device 12',
     devui: '#000012',
     reading: -1,
     incomingDate: getDateWithMinutesOffset(-1),
@@ -119,7 +119,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.Alarm,
   },
   {
-    name: 'Device 0013',
+    name: 'Device 13',
     devui: '#000013',
     reading: -9,
     incomingDate: getDateWithMinutesOffset(-10),
@@ -130,7 +130,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.Alarm,
   },
   {
-    name: 'Device 0014',
+    name: 'Device 14',
     devui: '#000014',
     reading: 5,
     incomingDate: getDateWithMinutesOffset(-7),
@@ -141,7 +141,7 @@ export const DEVICES: Device[] = [
     status: DeviceStatus.NoData,
   },
   {
-    name: 'Device 0015',
+    name: 'Device 15',
     devui: '#000015',
     reading: 2,
     incomingDate: new Date(),

@@ -1,8 +1,28 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <!-- Title -->
   <h1 class="navbar-brand">{{ pageTitle }}</h1>
 
-  <dm-device-filters-form class="ml-auto"></dm-device-filters-form>
+  <!-- Device search -->
+  <div class="w-25 mr-4">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Search"
+      #autocompleteTrigger
+      (click)="showDeviceAutocomplete()"
+      (keyup)="onDeviceSearchInput($event.target.value)"
+    />
+  </div>
+  <dm-autocomplete [autocompleteTrigger]="autocompleteTrigger">
+    <dm-device-autocomplete-list></dm-device-autocomplete-list>
+  </dm-autocomplete>
 
+  <!-- Device filters -->
+  <div class="mr-auto">
+    <dm-device-filters-form></dm-device-filters-form>
+  </div>
+
+  <!-- Add new device -->
   <div class="ml-auto">
     <button
       (click)="showDeviceFormModal()"
@@ -14,6 +34,7 @@
   </div>
 </nav>
 
+<!-- Device form modal -->
 <dm-modal title="Add new device" (modalClosed)="onDeviceModalClosed()">
   <dm-device-form (formSubmitted)="onDeviceFormSubmitted()"></dm-device-form>
 </dm-modal>

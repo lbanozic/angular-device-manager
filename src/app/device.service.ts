@@ -8,6 +8,7 @@ import { DEVICES } from './device-mock';
 })
 export class DeviceService {
   devices$ = new Subject<Device[]>();
+  deviceSearchTerm$ = new Subject<string>();
 
   private deviceList: Device[] = DEVICES;
   private deviceListFiltered: Device[] = DEVICES;
@@ -34,6 +35,29 @@ export class DeviceService {
     this.deviceStatusFilters = deviceStatusFilters;
     this.deviceListFiltered = this.getFilteredDeviceList(this.deviceList);
     this.devices$.next(this.deviceListFiltered);
+  }
+
+  getSortedDevices(devicesToSort: Device[]) {
+    return devicesToSort.sort((device1, device2) => {
+      if (device1.name.toLowerCase() > device2.name.toLowerCase()) {
+        return 1;
+      }
+      if (device1.name.toLowerCase() < device2.name.toLowerCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  getDevicesBySearchTerm(
+    devicesToSearch: Device[],
+    searchTerm: string
+  ): Device[] {
+    return devicesToSearch.filter(
+      (device) =>
+        device.name.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+        device.devui.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
   }
 
   private getFilteredDeviceList(devicesToFilter: Device[]) {

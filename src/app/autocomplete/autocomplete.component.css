@@ -1,0 +1,6 @@
+.autocomplete-container {
+  width: 100%;
+  border-radius: 0.3rem;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.24);
+  background-color: #fff;
+}

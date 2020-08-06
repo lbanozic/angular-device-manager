@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { DeviceFormComponent } from '../device-form/device-form.component';
+import { DeviceService } from '../device.service';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
@@ -16,7 +18,10 @@ export class NavbarComponent implements OnInit {
   @ViewChild(DeviceFormComponent)
   deviceFormComponent: DeviceFormComponent;
 
-  constructor() {}
+  @ViewChild(AutocompleteComponent)
+  deviceAutocompleteComponent: AutocompleteComponent;
+
+  constructor(private deviceService: DeviceService) {}
 
   ngOnInit(): void {}
 
@@ -30,5 +35,13 @@ export class NavbarComponent implements OnInit {
 
   onDeviceFormSubmitted() {
     this.deviceFormModalComponent.hide();
+  }
+
+  showDeviceAutocomplete() {
+    this.deviceAutocompleteComponent.show();
+  }
+
+  onDeviceSearchInput(searchTerm: string) {
+    this.deviceService.deviceSearchTerm$.next(searchTerm);
   }
 }

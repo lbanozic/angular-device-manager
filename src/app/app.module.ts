@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { DeviceAutocompleteListComponent } from './device-autocomplete-list/device-autocomplete-list.component';
 import { DeviceFiltersFormComponent } from './device-filters-form/device-filters-form.component';
 import { DeviceFormComponent } from './device-form/device-form.component';
 import { DeviceListComponent } from './device-list/device-list.component';
@@ -29,6 +31,8 @@ import { PopoverComponent } from './popover/popover.component';
     IconXComponent,
     DeviceFormComponent,
     DeviceFiltersFormComponent,
+    AutocompleteComponent,
+    DeviceAutocompleteListComponent,
   ],
   imports: [
     BrowserModule,
