@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
@@ -38,5 +39,12 @@ export class DeviceAutocompleteListComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  scrollToDeviceElement(deviceElementId: string) {
+    const deviceElement: HTMLElement = document.getElementById(deviceElementId);
+    deviceElement.classList.add('pulse');
+    deviceElement.scrollIntoView({ behavior: 'smooth' });
+    timer(3000).subscribe(() => deviceElement.classList.remove('pulse'));
   }
 }

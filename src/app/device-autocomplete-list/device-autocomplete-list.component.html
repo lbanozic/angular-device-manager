@@ -1,8 +1,9 @@
 <div class="list-group">
-  <a
+  <button
     *ngFor="let device of autocompleteDevices"
-    href="#"
+    (click)="scrollToDeviceElement(device.devui)"
     class="list-group-item list-group-item-action"
-    ><small>{{ device.devui }}</small> - {{ device.name }}</a
   >
+    <small>{{ device.devui }}</small> - {{ device.name }}
+  </button>
 </div>
