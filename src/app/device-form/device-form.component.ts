@@ -32,11 +32,10 @@ export class DeviceFormComponent implements OnInit {
   ngOnInit(): void {
     this.deviceForm = new FormGroup(
       {
-        devui: new FormControl(
-          '',
-          Validators.required,
-          this.hexPatternValidator
-        ),
+        devui: new FormControl('', Validators.required, [
+          this.hexPatternValidator,
+          this.uniqueDevuiValidator,
+        ]),
         min: new FormControl(''),
         max: new FormControl(''),
         name: new FormControl('', Validators.required),
@@ -98,6 +97,29 @@ export class DeviceFormComponent implements OnInit {
           map((formValues) =>
             formValues.min && formValues.max && formValues.min > formValues.max
               ? { minMaxInvalid: true }
+              : null
+          ),
+          first(),
+          catchError(() => of(null))
+        );
+      }
+      return of(null);
+    };
+  }
+
+  get uniqueDevuiValidator(): AsyncValidatorFn {
+    return (
+      control: FormControl
+    ):
+      | Promise<ValidationErrors | null>
+      | Observable<ValidationErrors | null> => {
+      if (control.value) {
+        return control.valueChanges.pipe(
+          debounceTime(1000),
+          distinctUntilChanged(),
+          map((value) =>
+            this.deviceService.doesDeviceExists(value)
+              ? { doesDevuiExist: true }
               : null
           ),
           first(),

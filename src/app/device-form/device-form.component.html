@@ -16,6 +16,10 @@
       <div *ngIf="devui.errors?.isHexPatternInvalid">
         Devui must be in hex pattern, e.g. #44dd11 or #cb74ae.
       </div>
+      <div *ngIf="devui.errors?.doesDevuiExist">
+        There is already device with that devui in the list. Devui must be
+        unique.
+      </div>
     </div>
   </div>
   <div class="form-group">

@@ -37,7 +37,7 @@ export class DeviceService {
     this.devices$.next(this.deviceListFiltered);
   }
 
-  getSortedDevices(devicesToSort: Device[]) {
+  getSortedDevices(devicesToSort: Device[]): Device[] {
     return devicesToSort.sort((device1, device2) => {
       if (device1.name.toLowerCase() > device2.name.toLowerCase()) {
         return 1;
@@ -60,7 +60,13 @@ export class DeviceService {
     );
   }
 
-  private getFilteredDeviceList(devicesToFilter: Device[]) {
+  doesDeviceExists(devui: string): boolean {
+    return this.deviceList.some(
+      (device) => device.devui.toLowerCase() === devui.toLowerCase()
+    );
+  }
+
+  private getFilteredDeviceList(devicesToFilter: Device[]): Device[] {
     return devicesToFilter.filter((device) =>
       this.deviceStatusFilters.includes(device.status)
     );
