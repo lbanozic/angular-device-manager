@@ -3,7 +3,7 @@
   <h1 class="navbar-brand">{{ pageTitle }}</h1>
 
   <!-- Device search -->
-  <div class="w-25 mr-4">
+  <div class="mr-4 input-group autocomplete-input-container">
     <input
       class="form-control"
       type="text"
@@ -12,9 +12,20 @@
       (click)="showDeviceAutocomplete()"
       (keyup)="onDeviceSearchInput($event.target.value)"
     />
+    <div class="input-group-append">
+      <button
+        class="btn btn-light px-2 py-0"
+        type="button"
+        (click)="onDeviceSearchInput(''); autocompleteTrigger.value = ''"
+      >
+        <dm-icon-x></dm-icon-x>
+      </button>
+    </div>
   </div>
   <dm-autocomplete [autocompleteTrigger]="autocompleteTrigger">
-    <dm-device-autocomplete-list></dm-device-autocomplete-list>
+    <dm-device-autocomplete-list
+      (autocompleteResultClicked)="onAutocompleteResultClicked()"
+    ></dm-device-autocomplete-list>
   </dm-autocomplete>
 
   <!-- Device filters -->

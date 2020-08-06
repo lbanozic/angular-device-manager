@@ -1,7 +1,7 @@
 <div class="list-group">
   <button
     *ngFor="let device of autocompleteDevices"
-    (click)="scrollToDeviceElement(device.devui)"
+    (click)="onAutocompleteResultClick(device.devui)"
     class="list-group-item list-group-item-action"
   >
     <small>{{ device.devui }}</small> - {{ device.name }}

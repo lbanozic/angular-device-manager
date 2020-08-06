@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { timer } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Device } from '../device';
@@ -13,6 +13,8 @@ export class DeviceAutocompleteListComponent implements OnInit {
   private devices: Device[];
   autocompleteDevices: Device[];
   private searchTerm = '';
+
+  @Output() autocompleteResultClicked = new EventEmitter();
 
   constructor(private deviceService: DeviceService) {}
 
@@ -39,6 +41,11 @@ export class DeviceAutocompleteListComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  onAutocompleteResultClick(deviceElementId: string) {
+    this.scrollToDeviceElement(deviceElementId);
+    this.autocompleteResultClicked.emit();
   }
 
   scrollToDeviceElement(deviceElementId: string) {

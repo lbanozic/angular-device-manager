@@ -44,4 +44,8 @@ export class NavbarComponent implements OnInit {
   onDeviceSearchInput(searchTerm: string) {
     this.deviceService.deviceSearchTerm$.next(searchTerm);
   }
+
+  onAutocompleteResultClicked() {
+    this.deviceAutocompleteComponent.hide();
+  }
 }
