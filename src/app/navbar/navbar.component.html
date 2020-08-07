@@ -12,7 +12,7 @@
       (click)="showDeviceAutocomplete()"
       (keyup)="onDeviceSearchInput($event.target.value)"
     />
-    <div class="input-group-append">
+    <div class="input-group-append" *ngIf="autocompleteTrigger.value">
       <button
         class="btn btn-light px-2 py-0"
         type="button"
