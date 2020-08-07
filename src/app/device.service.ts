@@ -11,7 +11,7 @@ export class DeviceService {
   deviceSearchTerm$ = new Subject<string>();
 
   private deviceList: Device[] = DEVICES;
-  private deviceListFiltered: Device[] = DEVICES;
+  private deviceListFiltered: Device[] = this.deviceList;
 
   private deviceStatusFilters: string[] = [
     DeviceStatus.Alarm,
