@@ -1,0 +1,6 @@
+.loading-indicator {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  z-index: 800;
+}
