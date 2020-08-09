@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Device, DeviceStatus } from './device';
-import { DEVICES } from './device-mock';
+import { DEVICES } from './device-generator';
 
 @Injectable({
   providedIn: 'root',
