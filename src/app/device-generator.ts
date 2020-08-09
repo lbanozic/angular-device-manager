@@ -1,6 +1,13 @@
 import { Device, DeviceStatus } from './device';
 
-export const DEVICES: Device[] = getRandomDevices(100);
+export function generateRandomDevices(
+  numberOfDevices: number
+): Promise<Device[]> {
+  return new Promise((resolve) => {
+    const devices: Device[] = getRandomDevices(numberOfDevices);
+    resolve(devices);
+  });
+}
 
 function getRandomDevices(numberOfDevices: number): Device[] {
   const randomDevices: Device[] = [];

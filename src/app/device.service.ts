@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Device, DeviceStatus } from './device';
-import { DEVICES } from './device-generator';
+import { generateRandomDevices } from './device-generator';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ export class DeviceService {
   devices$ = new Subject<Device[]>();
   deviceSearchTerm$ = new Subject<string>();
 
-  private deviceList: Device[] = DEVICES;
-  private deviceListFiltered: Device[] = this.deviceList;
+  private deviceList: Device[];
+  private deviceListFiltered: Device[];
 
   private deviceStatusFilters: string[] = [
     DeviceStatus.Alarm,
@@ -22,7 +22,11 @@ export class DeviceService {
   constructor() {}
 
   getDevices() {
-    this.devices$.next(this.deviceListFiltered);
+    generateRandomDevices(1000).then((devices) => {
+      this.deviceList = devices;
+      this.deviceListFiltered = devices;
+      this.devices$.next(this.deviceListFiltered);
+    });
   }
 
   addDevice(device: Device) {
