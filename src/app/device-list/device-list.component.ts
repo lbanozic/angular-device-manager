@@ -35,7 +35,7 @@ export class DeviceListComponent implements OnInit, OnDestroy {
     this.deviceSubscription.unsubscribe();
   }
 
-  trackByItems(index: number, device: Device): string {
+  trackByDevui(index: number, device: Device): string {
     return device.devui;
   }
 }
