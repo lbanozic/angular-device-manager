@@ -27,8 +27,6 @@ export class DeviceAutocompleteListComponent implements OnInit {
         .slice(0, 5);
     });
 
-    this.deviceService.getDevices();
-
     this.deviceService.deviceSearchTerm$
       .pipe(
         debounceTime(1000),
