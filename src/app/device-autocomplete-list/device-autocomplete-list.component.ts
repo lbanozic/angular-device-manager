@@ -1,5 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { timer } from 'rxjs';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Subscription, timer } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
@@ -9,25 +15,32 @@ import { DeviceService } from '../device.service';
   templateUrl: './device-autocomplete-list.component.html',
   styleUrls: ['./device-autocomplete-list.component.css'],
 })
-export class DeviceAutocompleteListComponent implements OnInit {
-  private devices: Device[];
+export class DeviceAutocompleteListComponent implements OnInit, OnDestroy {
   autocompleteDevices: Device[];
+
+  private devices: Device[];
   private searchTerm = '';
+
+  private deviceSubscription: Subscription;
+  private deviceSearchTermSubscription: Subscription;
+  private pulseEffectRemoveTimerSubscription: Subscription;
 
   @Output() autocompleteResultClicked = new EventEmitter();
 
   constructor(private deviceService: DeviceService) {}
 
   ngOnInit(): void {
-    this.deviceService.devices$.subscribe((deviceList) => {
-      const sortedDevices = this.deviceService.getSortedDevices(deviceList);
-      this.devices = sortedDevices;
-      this.autocompleteDevices = this.deviceService
-        .getDevicesBySearchTerm(sortedDevices, this.searchTerm)
-        .slice(0, 5);
-    });
+    this.deviceSubscription = this.deviceService.devices$.subscribe(
+      (deviceList) => {
+        const sortedDevices = this.deviceService.getSortedDevices(deviceList);
+        this.devices = sortedDevices;
+        this.autocompleteDevices = this.deviceService
+          .getDevicesBySearchTerm(sortedDevices, this.searchTerm)
+          .slice(0, 5);
+      }
+    );
 
-    this.deviceService.deviceSearchTerm$
+    this.deviceSearchTermSubscription = this.deviceService.deviceSearchTerm$
       .pipe(
         debounceTime(1000),
         distinctUntilChanged(),
@@ -41,6 +54,12 @@ export class DeviceAutocompleteListComponent implements OnInit {
       .subscribe();
   }
 
+  ngOnDestroy(): void {
+    this.deviceSubscription.unsubscribe();
+    this.deviceSearchTermSubscription.unsubscribe();
+    this.pulseEffectRemoveTimerSubscription.unsubscribe();
+  }
+
   onAutocompleteResultClick(deviceElementId: string) {
     this.scrollToDeviceElement(deviceElementId);
     this.autocompleteResultClicked.emit();
@@ -50,6 +69,8 @@ export class DeviceAutocompleteListComponent implements OnInit {
     const deviceElement: HTMLElement = document.getElementById(deviceElementId);
     deviceElement.classList.add('pulse');
     deviceElement.scrollIntoView({ behavior: 'smooth' });
-    timer(3000).subscribe(() => deviceElement.classList.remove('pulse'));
+    this.pulseEffectRemoveTimerSubscription = timer(3000).subscribe(() =>
+      deviceElement.classList.remove('pulse')
+    );
   }
 }

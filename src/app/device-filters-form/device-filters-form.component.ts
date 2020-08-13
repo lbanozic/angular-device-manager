@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { DeviceService } from '../device.service';
 
 @Component({
@@ -7,8 +8,10 @@ import { DeviceService } from '../device.service';
   templateUrl: './device-filters-form.component.html',
   styleUrls: ['./device-filters-form.component.css'],
 })
-export class DeviceFiltersFormComponent implements OnInit {
+export class DeviceFiltersFormComponent implements OnInit, OnDestroy {
   deviceFiltersForm: FormGroup;
+
+  private deviceFiltersFormValueChangedSubscription: Subscription;
 
   constructor(private deviceService: DeviceService) {}
 
@@ -19,9 +22,15 @@ export class DeviceFiltersFormComponent implements OnInit {
       Ok: new FormControl(true),
     });
 
-    this.deviceFiltersForm.valueChanges.subscribe((values) => {
-      const filters = Object.keys(values).filter((x) => values[x] !== false);
-      this.deviceService.applyFilters(filters);
-    });
+    this.deviceFiltersFormValueChangedSubscription = this.deviceFiltersForm.valueChanges.subscribe(
+      (values) => {
+        const filters = Object.keys(values).filter((x) => values[x] !== false);
+        this.deviceService.applyFilters(filters);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.deviceFiltersFormValueChangedSubscription.unsubscribe();
   }
 }
