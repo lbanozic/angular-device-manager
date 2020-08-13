@@ -1,11 +1,18 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Device, DeviceStatus } from '../device';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { Device } from '../device';
 import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'dm-device',
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeviceComponent implements OnInit {
   @Input() device: Device;

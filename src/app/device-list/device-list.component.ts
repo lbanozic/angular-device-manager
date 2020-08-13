@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'dm-device-list',
