@@ -27,7 +27,8 @@ export class DeviceListComponent implements OnInit, OnDestroy {
         });
       }
     );
-    this.deviceService.getDevices();
+
+    this.deviceService.generateDevices();
   }
 
   ngOnDestroy(): void {

@@ -16,6 +16,8 @@ export class DeviceService {
   private deviceList: Device[];
   private deviceListFiltered: Device[];
 
+  private numberOfDevices = 1000;
+
   private deviceStatusFilters: string[] = [
     DeviceStatus.Alarm,
     DeviceStatus.NoData,
@@ -27,8 +29,8 @@ export class DeviceService {
     this.deviceSearchTerm$ = this.deviceSearchTermSource.asObservable();
   }
 
-  getDevices() {
-    generateRandomDevices(1000).then((devices) => {
+  generateDevices() {
+    generateRandomDevices(this.numberOfDevices).then((devices) => {
       this.deviceList = devices;
       this.deviceListFiltered = devices;
       this.devicesSource.next(this.deviceListFiltered);
