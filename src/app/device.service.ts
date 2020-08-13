@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Device, DeviceStatus } from './device';
 import { generateRandomDevices } from './device-generator';
 
@@ -7,8 +7,11 @@ import { generateRandomDevices } from './device-generator';
   providedIn: 'root',
 })
 export class DeviceService {
-  devices$ = new Subject<Device[]>();
-  deviceSearchTerm$ = new Subject<string>();
+  devices$: Observable<Device[]>;
+  deviceSearchTerm$: Observable<string>;
+
+  private devicesSource = new Subject<Device[]>();
+  private deviceSearchTermSource = new Subject<string>();
 
   private deviceList: Device[];
   private deviceListFiltered: Device[];
@@ -19,26 +22,29 @@ export class DeviceService {
     DeviceStatus.Ok,
   ];
 
-  constructor() {}
+  constructor() {
+    this.devices$ = this.devicesSource.asObservable();
+    this.deviceSearchTerm$ = this.deviceSearchTermSource.asObservable();
+  }
 
   getDevices() {
     generateRandomDevices(1000).then((devices) => {
       this.deviceList = devices;
       this.deviceListFiltered = devices;
-      this.devices$.next(this.deviceListFiltered);
+      this.devicesSource.next(this.deviceListFiltered);
     });
   }
 
   addDevice(device: Device) {
     this.deviceList.push(device);
     this.deviceListFiltered = this.getFilteredDeviceList(this.deviceList);
-    this.devices$.next(this.deviceListFiltered);
+    this.devicesSource.next(this.deviceListFiltered);
   }
 
   applyFilters(deviceStatusFilters: string[]) {
     this.deviceStatusFilters = deviceStatusFilters;
     this.deviceListFiltered = this.getFilteredDeviceList(this.deviceList);
-    this.devices$.next(this.deviceListFiltered);
+    this.devicesSource.next(this.deviceListFiltered);
   }
 
   getSortedDevices(devicesToSort: Device[]): Device[] {
@@ -68,6 +74,10 @@ export class DeviceService {
     return this.deviceList.some(
       (device) => device.devui.toLowerCase() === devui.toLowerCase()
     );
+  }
+
+  searchDevice(searchTerm: string) {
+    this.deviceSearchTermSource.next(searchTerm);
   }
 
   private getFilteredDeviceList(devicesToFilter: Device[]): Device[] {
