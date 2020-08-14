@@ -1,4 +1,4 @@
-import { Device, DeviceStatus } from './device';
+import { Device, DeviceReading, DeviceStatus } from './device';
 
 export function generateRandomDevices(
   numberOfDevices: number
@@ -9,6 +9,17 @@ export function generateRandomDevices(
   });
 }
 
+export function generateRandomDeviceReadings(
+  deviceList: Device[]
+): Promise<Device[]> {
+  return new Promise((resolve) => {
+    const devicesWithRandomReadings: Device[] = getRandomDeviceReadings(
+      deviceList
+    );
+    resolve(devicesWithRandomReadings);
+  });
+}
+
 function getRandomDevices(numberOfDevices: number): Device[] {
   const randomDevices: Device[] = [];
 
@@ -16,6 +27,7 @@ function getRandomDevices(numberOfDevices: number): Device[] {
     const newDevice: Device = {
       name: getRandomDeviceName(),
       devui: getRandomDevui(),
+      creationDate: new Date(),
       batteryLevel: getRandomBatteryLevel(),
       signalStrength: getRandomSignalStrength(),
       status: DeviceStatus.Ok,
@@ -37,16 +49,54 @@ function getRandomDevices(numberOfDevices: number): Device[] {
       newDevice.max = max;
     }
 
-    if (getRandomBoolean()) {
-      newDevice.reading = getRandomReading();
-    }
-
     newDevice.status = getDeviceStatus(newDevice);
 
     randomDevices.push(newDevice);
   }
 
   return randomDevices;
+}
+
+function getRandomDeviceReadings(deviceList: Device[]): Device[] {
+  const numberOfReadings = getRandomNumberInRange(0, deviceList.length);
+  const readings: DeviceReading[] = [];
+
+  for (let i = 0; i < numberOfReadings; i++) {
+    let randomDevice: Device;
+    let randomDeviceAlreadyUpdated = true;
+    while (randomDeviceAlreadyUpdated) {
+      randomDevice =
+        deviceList[getRandomNumberInRange(0, deviceList.length - 1)];
+      randomDeviceAlreadyUpdated = readings.some(
+        (reading) => reading.devui === randomDevice.devui
+      );
+    }
+
+    const newReading: DeviceReading = {
+      devui: randomDevice.devui,
+      reading: getRandomReading(),
+      incomingDate: new Date(),
+      batteryLevel: getRandomBatteryLevel(),
+      signalStrength: getRandomSignalStrength(),
+    };
+
+    readings.push(newReading);
+  }
+
+  const devicesWithUpdatedReadings = deviceList.map((device) => {
+    const deviceReading = readings.find(
+      (reading) => reading.devui === device.devui
+    );
+    if (deviceReading) {
+      device.reading = deviceReading.reading;
+      device.incomingDate = deviceReading.incomingDate;
+      device.batteryLevel = deviceReading.batteryLevel;
+      device.signalStrength = deviceReading.signalStrength;
+    }
+    return device;
+  });
+
+  return devicesWithUpdatedReadings;
 }
 
 function getDeviceStatus(device: Device): DeviceStatus {

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Device, DeviceStatus } from './device';
-import { generateRandomDevices } from './device-generator';
+import {
+  generateRandomDeviceReadings,
+  generateRandomDevices,
+} from './device-generator';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +38,18 @@ export class DeviceService {
       this.deviceListFiltered = devices;
       this.devicesSource.next(this.deviceListFiltered);
     });
+  }
+
+  updateDeviceReadings() {
+    generateRandomDeviceReadings(this.deviceList).then(
+      (devicesWithUpdatedReadings) => {
+        this.deviceList = this.getDevicesWithUpdatedStatuses(
+          devicesWithUpdatedReadings
+        );
+        this.deviceListFiltered = this.getFilteredDeviceList(this.deviceList);
+        this.devicesSource.next(this.deviceListFiltered);
+      }
+    );
   }
 
   addDevice(device: Device) {
@@ -86,5 +101,31 @@ export class DeviceService {
     return devicesToFilter.filter((device) =>
       this.deviceStatusFilters.includes(device.status)
     );
+  }
+
+  private getDevicesWithUpdatedStatuses(deviceList: Device[]): Device[] {
+    return deviceList.map((device) => {
+      device.status = this.getDeviceStatus(device);
+      return device;
+    });
+  }
+
+  private getDeviceStatus(device: Device): DeviceStatus {
+    if (device.reading < device.min || device.reading > device.max) {
+      return DeviceStatus.Alarm;
+    } else if (
+      (this.getTimeDiffInMinutes(device.creationDate, new Date()) >= 2 &&
+        !device.reading &&
+        device.reading !== 0) ||
+      (device.incomingDate &&
+        this.getTimeDiffInMinutes(device.incomingDate, new Date()) >= 2)
+    ) {
+      return DeviceStatus.NoData;
+    }
+    return DeviceStatus.Ok;
+  }
+
+  private getTimeDiffInMinutes(date1: any, date2: any) {
+    return Math.floor(Math.abs(date1 - date2) / 1000 / 60);
   }
 }

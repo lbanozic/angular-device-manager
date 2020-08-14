@@ -8,8 +8,16 @@
       <h6>{{ device.name }}</h6>
       <h6 class="font-weight-lighter text-small">{{ device.devui }}</h6>
       <h6 class="font-weight-lighter text-small">
+        Creation time:
+        {{
+          device.creationDate ? (device.creationDate | date: "HH:mm:ss") : "-"
+        }}
+      </h6>
+      <h6 class="font-weight-lighter text-small">
         Last reading time:
-        {{ device.incomingDate ? (device.incomingDate | date: "HH:mm") : "-" }}
+        {{
+          device.incomingDate ? (device.incomingDate | date: "HH:mm:ss") : "-"
+        }}
       </h6>
       <h2 class="text-center">{{ deviceReading }}</h2>
       <div class="row min-max-container">

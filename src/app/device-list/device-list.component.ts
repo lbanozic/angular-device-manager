@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
 
@@ -14,6 +14,7 @@ export class DeviceListComponent implements OnInit, OnDestroy {
   isLoading = false;
 
   private deviceSubscription: Subscription;
+  private deviceUpdaterTimerSubscription: Subscription;
 
   constructor(private deviceService: DeviceService) {}
 
@@ -28,11 +29,16 @@ export class DeviceListComponent implements OnInit, OnDestroy {
       }
     );
 
+    this.deviceUpdaterTimerSubscription = timer(10000, 10000).subscribe(() =>
+      this.deviceService.updateDeviceReadings()
+    );
+
     this.deviceService.generateDevices();
   }
 
   ngOnDestroy(): void {
     this.deviceSubscription.unsubscribe();
+    this.deviceUpdaterTimerSubscription.unsubscribe();
   }
 
   trackByDevui(index: number, device: Device): string {

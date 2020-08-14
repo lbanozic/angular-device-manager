@@ -138,6 +138,7 @@ export class DeviceFormComponent implements OnInit {
     const device: Device = {
       name: this.name.value,
       devui: this.devui.value,
+      creationDate: new Date(),
       min: this.min.value,
       max: this.max.value,
       batteryLevel: 100,
